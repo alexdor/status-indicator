@@ -58,7 +58,7 @@ actualDevices=$(($activeDevices-$alwaysActiveDevices)) # The actual number of ac
 # If not and the number of activeDevices is different
 if [[ $actualDevices -le 0 ]]; then
   $currentDirectory/count_users_with_ping.sh -fn $fileName -a $alwaysActiveDevice -fc $actualDevices
-elif [[ $activeDevices -ne $previousActiveDevices ]]; then
+elif [[ $actualDevices -ne $previousActiveDevices ]]; then
   mosquitto_pub -h www.techministry.gr -u EnterYourUsernameHere -P aSuperSecurePassword --cafile PathToYourCA -t "techministry/spacestatus/hackers" -m "$actualDevices" # Publish the number of active users through MQTT
   echo $actualDevices > $currentDirectory/$fileName
 fi
